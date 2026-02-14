@@ -1,12 +1,13 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Github, Linkedin, Mail, Download, ExternalLink, Code, Server, Cloud, Cpu, Terminal, Database, Phone, X } from 'lucide-react'
+import { Github, Linkedin, Mail, Download, ExternalLink, Code, Server, Cloud, Cpu, Terminal, Database, Phone, X, Sun, Moon } from 'lucide-react'
 
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [touchStart, setTouchStart] = useState(null)
+  const [darkMode, setDarkMode] = useState(false)
 
   const handleTouchStart = (e) => {
     setTouchStart(e.touches[0].clientX)
@@ -99,7 +100,7 @@ export default function Portfolio() {
   ]
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-indigo-100 selection:text-indigo-900">
+    <div className={`min-h-screen ${darkMode ? 'bg-slate-900 text-white' : 'bg-slate-50 text-slate-900'} font-sans selection:bg-indigo-100 selection:text-indigo-900`}>
       {/* Navigation */}
       <nav className="fixed w-full bg-white/80 backdrop-blur-md border-b border-slate-200 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -114,11 +115,17 @@ export default function Portfolio() {
             </motion.div>
             
             {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
+            <div className="hidden md:flex items-center space-x-8">
               <a href="#about" className="text-slate-600 hover:text-indigo-600 transition-colors">About</a>
               <a href="#projects" className="text-slate-600 hover:text-indigo-600 transition-colors">Projects</a>
               <a href="#skills" className="text-slate-600 hover:text-indigo-600 transition-colors">Skills</a>
               <a href="#contact" className="text-slate-600 hover:text-indigo-600 transition-colors">Contact</a>
+              <button 
+                onClick={() => setDarkMode(!darkMode)}
+                className="p-2 rounded-full hover:bg-slate-100 transition-colors"
+              >
+                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -155,7 +162,7 @@ export default function Portfolio() {
           className="text-center space-y-8"
         >
           <motion.div variants={fadeInUp} className="inline-block p-2 px-4 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium border border-indigo-100">
-            Available for Senior Engineer & Architect Roles
+            📍 Melbourne, Australia • Available for Senior Engineer & Architect Roles
           </motion.div>
           
           <motion.h1 variants={fadeInUp} className="text-5xl sm:text-7xl font-bold tracking-tight text-slate-900">
@@ -181,7 +188,7 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="py-20 bg-white">
+      <section id="projects" className={`py-20 ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -262,7 +269,7 @@ export default function Portfolio() {
       </section>
 
       {/* Skills Section */}
-      <section id="skills" className="py-20 bg-slate-50">
+      <section id="skills" className={`py-20 ${darkMode ? 'bg-slate-900' : 'bg-slate-50'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-slate-900">Technical Arsenal</h2>
@@ -300,7 +307,7 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 bg-white">
+      <section id="contact" className={`py-20 ${darkMode ? 'bg-slate-800' : 'bg-white'}`}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl font-bold text-slate-900 mb-8">Ready to Automate Your Infrastructure?</h2>
           <p className="text-xl text-slate-600 mb-12">
