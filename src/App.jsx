@@ -6,6 +6,26 @@ export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
+  const [touchStart, setTouchStart] = useState(null)
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.touches[0].clientX)
+  }
+
+  const handleTouchEnd = (e) => {
+    if (!touchStart) return
+    const touchEnd = e.changedTouches[0].clientX
+    const diff = touchStart - touchEnd
+    
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        setCurrentSlide(currentSlide === projects.length - 1 ? 0 : currentSlide + 1)
+      } else {
+        setCurrentSlide(currentSlide === 0 ? projects.length - 1 : currentSlide - 1)
+      }
+    }
+    setTouchStart(null)
+  }
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -173,7 +193,11 @@ export default function Portfolio() {
             <p className="mt-4 text-slate-600">Bridging the gap between traditional IT and modern automation.</p>
           </motion.div>
 
-          <div className="relative max-w-3xl mx-auto">
+          <div 
+            className="relative max-w-3xl mx-auto"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             {/* Slider Content */}
             <div className="overflow-hidden rounded-2xl">
               {projects.map((project, index) => (
