@@ -58,21 +58,21 @@ export default function Portfolio() {
       ]
     },
     {
-      id: 3,
-      title: "Autonomous AI Environment (OpenClaw)",
+      id: 4,
+      title: "Local RAG Demo (AI Document Chat)",
       role: "AI Engineer",
-      tags: ["LLMs", "Agentic AI", "Node.js", "Local execution"],
-      icon: <Cpu className="w-12 h-12 text-purple-600" />,
-      gradient: "from-purple-100 to-pink-50",
-      shortDesc: "A local agentic AI system capable of executing code, managing files, and running complex multi-step workflows autonomously.",
-      problem: "Standard chatbots (ChatGPT) cannot interact with local files, run code, or manage system tasks autonomously.",
-      solution: "Deployed a local OpenClaw agent environment. Configured it to have safe access to the file system, shell, and Docker to execute complex development tasks.",
-      impact: "Automates repetitive coding tasks, manages system health checks, and acts as a pair programmer for complex architectural work.",
+      tags: ["Python", "LangChain", "Ollama", "FAISS", "RAG"],
+      icon: <Cpu className="w-12 h-12 text-green-600" />,
+      gradient: "from-green-100 to-emerald-50",
+      shortDesc: "A local-only AI system that allows users to ask questions about their documents using Retrieval-Augmented Generation (RAG) and local LLMs.",
+      problem: "Most AI document solutions require cloud APIs (OpenAI), which cost money and raise privacy concerns for enterprise clients.",
+      solution: "Built a fully local RAG application using Ollama (Phi3) for inference and FAISS for vector storage. No data leaves the local machine.",
+      impact: "Zero-cost inference, complete data privacy, and demonstrates ability to build enterprise-grade AI solutions without cloud dependencies.",
       features: [
-        "Autonomous Code Execution",
-        "File System Management",
-        "Multi-Step Reasoning",
-        "Self-Correction Capabilities"
+        "Local LLM Inference (Phi3)",
+        "Vector Database (FAISS)",
+        "PDF & DOCX Support",
+        "Streamlit UI"
       ]
     }
   ]
