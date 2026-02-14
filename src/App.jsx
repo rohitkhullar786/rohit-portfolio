@@ -4,6 +4,7 @@ import { Github, Linkedin, Mail, Download, ExternalLink, Code, Server, Cloud, Cp
 
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -85,19 +86,43 @@ export default function Portfolio() {
             <motion.div 
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); setIsMenuOpen(false); }}
               className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent cursor-pointer"
             >
               Rohit Khullar
             </motion.div>
+            
+            {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8">
               <a href="#about" className="text-slate-600 hover:text-indigo-600 transition-colors">About</a>
               <a href="#projects" className="text-slate-600 hover:text-indigo-600 transition-colors">Projects</a>
               <a href="#skills" className="text-slate-600 hover:text-indigo-600 transition-colors">Skills</a>
               <a href="#contact" className="text-slate-600 hover:text-indigo-600 transition-colors">Contact</a>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button 
+              className="md:hidden text-slate-600"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              {isMenuOpen ? <X /> : <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>}
+            </button>
           </div>
         </div>
+        
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white border-t border-slate-100 py-4">
+            <div className="flex flex-col space-y-4">
+              <a href="#about" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:text-indigo-600 px-4">About</a>
+              <a href="#projects" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:text-indigo-600 px-4">Projects</a>
+              <a href="#skills" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:text-indigo-600 px-4">Skills</a>
+              <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:text-indigo-600 px-4">Contact</a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
