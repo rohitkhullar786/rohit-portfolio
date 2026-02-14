@@ -5,6 +5,7 @@ import { Github, Linkedin, Mail, Download, ExternalLink, Code, Server, Cloud, Cp
 export default function Portfolio() {
   const [selectedProject, setSelectedProject] = useState(null)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [currentSlide, setCurrentSlide] = useState(0)
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -172,37 +173,66 @@ export default function Portfolio() {
             <p className="mt-4 text-slate-600">Bridging the gap between traditional IT and modern automation.</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
-              <motion.div 
-                key={project.id}
-                whileHover={{ y: -5 }}
-                className="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer"
-                onClick={() => setSelectedProject(project)}
-              >
-                <div className={`h-48 bg-gradient-to-br ${project.gradient} flex items-center justify-center p-8`}>
-                  <div className="bg-white p-4 rounded-xl shadow-sm">
-                    {project.icon}
-                  </div>
-                </div>
-                <div className="p-8">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.slice(0, 3).map((tag, i) => (
-                      <span key={i} className="px-3 py-1 bg-white text-slate-700 text-xs font-medium rounded-full border border-slate-100 shadow-sm">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-900 mb-2">{project.title}</h3>
-                  <p className="text-slate-600 mb-6 line-clamp-3">
-                    {project.shortDesc}
-                  </p>
-                  <div className="flex items-center text-indigo-600 font-medium group-hover:gap-2 transition-all">
-                    View Case Study <ExternalLink size={16} className="ml-1" />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+          <div className="relative max-w-3xl mx-auto">
+            {/* Slider Content */}
+            <div className="overflow-hidden rounded-2xl">
+              {projects.map((project, index) => (
+                index === currentSlide && (
+                  <motion.div 
+                    key={project.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="group bg-slate-50 rounded-2xl border border-slate-100 overflow-hidden cursor-pointer"
+                    onClick={() => setSelectedProject(project)}
+                  >
+                    <div className={`h-64 bg-gradient-to-br ${project.gradient} flex items-center justify-center p-8`}>
+                      <div className="bg-white p-6 rounded-xl shadow-lg">
+                        {project.icon}
+                      </div>
+                    </div>
+                    <div className="p-8">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tags.slice(0, 3).map((tag, i) => (
+                          <span key={i} className="px-3 py-1 bg-white text-slate-700 text-xs font-medium rounded-full border border-slate-100 shadow-sm">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-2">{project.title}</h3>
+                      <p className="text-slate-600 mb-4">{project.shortDesc}</p>
+                      <div className="flex items-center text-indigo-600 font-medium">
+                        View Case Study <ExternalLink size={16} className="ml-1" />
+                      </div>
+                    </div>
+                  </motion.div>
+                )
+              ))}
+            </div>
+            
+            {/* Controls */}
+            <button 
+              onClick={() => setCurrentSlide(currentSlide === 0 ? projects.length - 1 : currentSlide - 1)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 bg-white rounded-full shadow-lg p-3 hover:bg-slate-50 hidden md:block"
+            >
+              ←
+            </button>
+            <button 
+              onClick={() => setCurrentSlide(currentSlide === projects.length - 1 ? 0 : currentSlide + 1)}
+              className="absolute right-0 top-1/2 translate-x-4 bg-white rounded-full shadow-lg p-3 hover:bg-slate-50 hidden md:block"
+            >
+              →
+            </button>
+
+            {/* Dots */}
+            <div className="flex justify-center gap-2 mt-6">
+              {projects.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentSlide(i)}
+                  className={`h-2 rounded-full transition-all ${i === currentSlide ? 'bg-indigo-600 w-6' : 'bg-slate-300 w-2'}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
