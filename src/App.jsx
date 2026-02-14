@@ -148,6 +148,12 @@ export default function Portfolio() {
               <a href="#projects" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:text-indigo-600 px-4">Projects</a>
               <a href="#skills" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:text-indigo-600 px-4">Skills</a>
               <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-slate-600 hover:text-indigo-600 px-4">Contact</a>
+              <button 
+                onClick={() => setDarkMode(!darkMode)}
+                className="flex items-center text-slate-600 hover:text-indigo-600 px-4"
+              >
+                {darkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+              </button>
             </div>
           </div>
         )}
@@ -162,7 +168,7 @@ export default function Portfolio() {
           className="text-center space-y-8"
         >
           <motion.div variants={fadeInUp} className="inline-block p-2 px-4 rounded-full bg-indigo-50 text-indigo-700 text-sm font-medium border border-indigo-100">
-            📍 Melbourne, Australia • Available for Senior Engineer & Architect Roles
+            Available for Senior Engineer & Architect Roles
           </motion.div>
           
           <motion.h1 variants={fadeInUp} className="text-5xl sm:text-7xl font-bold tracking-tight text-slate-900">
