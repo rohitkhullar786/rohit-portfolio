@@ -45,7 +45,7 @@ export default function Portfolio() {
   const projects = [
     {
       id: 1,
-      title: "Djirra Travel Request System",
+      title: "Travel Request System",
       role: "Full Stack Developer & Architect",
       tags: ["Python", "Flask", "Azure AD", "SQLite", "Tailwind"],
       icon: <Server className="w-12 h-12 text-orange-600" />,
