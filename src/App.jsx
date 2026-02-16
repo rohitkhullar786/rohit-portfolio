@@ -185,9 +185,8 @@ export default function Portfolio() {
             <a href="#contact" className="px-8 py-3 bg-slate-900 text-white rounded-full font-medium hover:bg-slate-800 transition-all hover:scale-105 shadow-lg shadow-slate-200">
               Let's Talk
             </a>
-            <a href="/resume.pdf" className="px-8 py-3 bg-white text-slate-900 border border-slate-200 rounded-full font-medium hover:bg-slate-50 transition-all hover:scale-105 flex items-center gap-2 shadow-sm">
-              <Download size={18} />
-              Download Resume
+            <a href="#projects" className="px-8 py-3 bg-white text-slate-900 border border-slate-200 rounded-full font-medium hover:bg-slate-50 transition-all hover:scale-105 flex items-center gap-2 shadow-sm">
+              View Projects
             </a>
           </motion.div>
         </motion.div>
